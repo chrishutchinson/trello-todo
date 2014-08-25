@@ -1,0 +1,29 @@
+<div ng-if="message" class="alert alert-{{message.type}}">{{message.message}}</div>
+
+<div class="jumbotron" ng-show="!authorized">
+  <h1>Connect to Trello</h1>
+  <p class="lead">
+    Lorem ipsum dolor sit amet.
+  </p>
+  <p><a class="btn btn-lg btn-success" ng-href="#" ng-click="trelloAuthorize()">Authenticate</a></p>
+</div>
+
+<div ng-show="authorized && member">
+  <h1>Welcome back <em>{{member.fullName}}</em> <button ng-click="trelloLogout()" class="btn btn-danger btn-xs">Disconnect from Trello</button></h1>
+
+  <label for="boards">Select an existing board</label>
+  <select ng-show="boards" id="boards" ng-model="selectedBoard">
+    <option value="">--</option>
+    <option ng-repeat="board in boards" value="{{board.id}}">{{board.name}}</option>
+  </select>
+  <label>or <button ng-click="trelloBoardSetuo()" class="btn btn-primary btn-xs">create a new board</button></label>
+
+  <div ng-if="cards">
+    <ul class="cards">
+      <li ng-repeat="card in cards" class="{{card.list.class}}">
+        {{card.name}}
+        <button class="btn btn-xs btn-primary">Reveal</button>
+      </li>
+    </ul>
+  </div>
+</div>
